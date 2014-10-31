@@ -8,6 +8,14 @@
  * Controller of the fleetuiApp
  */
 angular.module('fleetuiApp')
-  .controller('MainCtrl', function ($scope, unitService) {
-    $scope.units = unitService.query();
+  .controller('MainCtrl', function ($scope, machineService, unitService) {
+    $scope.machine = {
+      loading: false,
+      items: machineService.query()
+    };
+
+    $scope.unit = {
+      loading: false,
+      items: unitService.query()
+    };
   });
