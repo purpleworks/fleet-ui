@@ -33,11 +33,9 @@ RUN \
   go get -u github.com/gorilla/websocket && \
   go get -u gopkg.in/unrolled/render.v1
 
-# set caching point
-ENV REFRESHED_AT 2014-10-31 4
-
-# go get fleet-client-go
-RUN go get -u github.com/jaehue/fleet-client-go
+RUN \
+  go get -u github.com/coreos/fleet/schema && \
+  go get -u github.com/juju/errgo
 
 # add source
 WORKDIR /gopath/src/github.com/jaehue/fleet-ui

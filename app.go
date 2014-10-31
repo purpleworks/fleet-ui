@@ -4,7 +4,6 @@ import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
-	fleetClientPkg "github.com/jaehue/fleet-client-go"
 	"gopkg.in/unrolled/render.v1"
 	"log"
 	"net/http"
@@ -39,20 +38,20 @@ func main() {
 }
 
 func machineAllHandler(w http.ResponseWriter, req *http.Request) {
-	fleetClient := fleetClientPkg.NewClientCLIWithPeer("http://192.168.81.101:4001")
+	fleetClient := NewClientCLIWithPeer("http://192.168.81.101:4001")
 	status, _ := fleetClient.MachineAll()
 	renderer.JSON(w, http.StatusOK, status)
 }
 
 func statusAllHandler(w http.ResponseWriter, req *http.Request) {
-	fleetClient := fleetClientPkg.NewClientCLIWithPeer("http://192.168.81.101:4001")
+	fleetClient := NewClientCLIWithPeer("http://192.168.81.101:4001")
 	status, _ := fleetClient.StatusAll()
 	renderer.JSON(w, http.StatusOK, status)
 }
 
 func statusHandler(w http.ResponseWriter, req *http.Request) {
 	key := mux.Vars(req)["id"]
-	fleetClient := fleetClientPkg.NewClientCLIWithPeer("http://192.168.81.101:4001")
+	fleetClient := NewClientCLIWithPeer("http://192.168.81.101:4001")
 	status, _ := fleetClient.StatusUnit(key)
 	renderer.JSON(w, http.StatusOK, status)
 }
@@ -74,7 +73,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// write journal message
 	key := mux.Vars(r)["id"]
-	fleetClient := fleetClientPkg.NewClientCLIWithPeer("http://192.168.81.101:4001")
+	fleetClient := NewClientCLIWithPeer("http://192.168.81.101:4001")
 	output, _ := fleetClient.JournalF(key)
 	for line := range output {
 		conn.WriteMessage(websocket.TextMessage, []byte(line))

@@ -51,7 +51,7 @@ src/
 ### web server 실행
 
 ```
-$ go run app.go
+$ go install && fleet-ui
 ```
 
 ### rest api 확인
@@ -64,11 +64,11 @@ $ curl http://localhost:3000/api/v1/units
 
 ### REST API
 
-- [GET] /api/v1/machines
+- [GET] /api/v1/machines  
 전체  machine 목록 조회
-- [GET] /api/v1/units
+- [GET] /api/v1/units  
 전체  unit 목록 조회
-- [GET] /api/v1/units/{unit-name}
+- [GET] /api/v1/units/{unit-name}  
 특정 unit 조회
 
 ### Web socket
