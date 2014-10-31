@@ -1,5 +1,5 @@
 <ul>
-  <li ng-repeat="machine in machine.items">
+  <li ng-repeat="machine in machine.items | orderBy:'IPAddress'">
     {{ machine.Machine }} /
     {{ machine.IPAddress }} /
     {{ machine.Metadata }}
@@ -7,7 +7,7 @@
 </ul>
 
 <ul>
-  <li ng-repeat="unit in unit.items">
+  <li ng-repeat="unit in unit.items | orderBy:'Unit'">
     {{ unit.Unit }}
   </li>
 </ul>
