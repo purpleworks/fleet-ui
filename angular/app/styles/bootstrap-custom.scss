@@ -1,0 +1,105 @@
+$icon-font-path: '/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/';
+
+$font-family-sans-serif: "Apple SD Gothic Neo", "Nanum Gothic", "나눔고딕", "Malgun Gothic", "맑은고딕", Dotum, "돋움", Gulim, "굴림", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$body-bg:               #e4e7ea !default;
+$link-color:            #666 !default;
+$link-hover-color:      #333 !default;
+$brand-primary:         #2c3e50;
+$brand-success:         #18bc9c;
+$brand-info:            #3498db;
+$brand-warning:         #f39c12;
+$brand-danger:          #e74c3c;
+
+$border-radius-base:        3px !default;
+$border-radius-large:       3px !default;
+$border-radius-small:       3px !default;
+
+$input-border-focus:        #ababab !default;
+
+$padding-base-vertical:     8px !default;
+$padding-large-vertical:    12px !default;
+$padding-small-vertical:    5px !default;
+
+$table-cell-padding:        12px !default;
+
+@import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss';
+
+// base
+a {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+div.moxie-shim { // plupload z-index bug fix
+  cursor: pointer;
+  z-index: 10;
+}
+
+// flat form style
+label {
+  color: #777;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+
+  &.checkbox-inline,
+  &.radio-inline {
+    color: #555;
+  }
+
+  small {
+    color: #aaa9a2;
+  }
+}
+
+.form-control {
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 8px 12px;
+
+  &:focus {
+    border-width: 2px;
+    padding: 7px 11px;
+  }
+}
+
+.has-error .form-control {
+  &:focus {
+    border-width: 2px;
+    padding: 7px 11px;
+  }
+}
+
+.radio label,
+.checkbox label {
+  color: $text-color;
+  padding-left: 0;
+}
+
+.has-error {
+  .form-control {
+    border: 1px solid #d95c5c;
+    box-shadow: none !important;
+  }
+}
+
+.btn {
+  box-shadow: none !important;
+  outline: 0 !important;
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &.btn-underline {
+    text-decoration: underline;
+  }
+
+  &.btn-icon {
+    .fa {
+      font-size: 16px;
+    }
+  }
+}
