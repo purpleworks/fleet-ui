@@ -5,8 +5,8 @@ fleet-ui
 
 ### go 설치
 
-go가 설치되어 있지 않다면, 아래 페이지를 참고하여 go 환경을 설정한다  
-https://golang.org/doc/install  
+go가 설치되어 있지 않다면, 아래 페이지를 참고하여 go 환경을 설정한다
+https://golang.org/doc/install
 https://golang.org/doc/code.html#Organization
 
 정상적으로 설치한 후 아래와 같이 go 환경을 확인한다.
@@ -64,12 +64,14 @@ $ curl http://localhost:3000/api/v1/units
 
 ### REST API
 
-- [GET] /api/v1/units  
+- [GET] /api/v1/machines
+전체  machine 목록 조회
+- [GET] /api/v1/units
 전체  unit 목록 조회
-- [GET] /api/v1/units/{unit-name}  
+- [GET] /api/v1/units/{unit-name}
 특정 unit 조회
 
 ### Web socket
 
-- ws://ws/journal/{unit-name}  
+- ws://ws/journal/{unit-name}
 특정 unit journal 조회

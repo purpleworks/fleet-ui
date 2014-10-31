@@ -34,7 +34,7 @@ RUN \
   go get -u gopkg.in/unrolled/render.v1
 
 # set caching point
-ENV REFRESHED_AT 2014-10-31 2
+ENV REFRESHED_AT 2014-10-31 4
 
 # go get fleet-client-go
 RUN go get -u github.com/jaehue/fleet-client-go
@@ -43,8 +43,6 @@ RUN go get -u github.com/jaehue/fleet-client-go
 WORKDIR /gopath/src/github.com/jaehue/fleet-ui
 ADD . /gopath/src/github.com/jaehue/fleet-ui
 RUN go install
-ADD start.sh /opt/fleet-ui/start.sh
-RUN chmod a+x /opt/fleet-ui/start.sh
 
 # Add VOLUME
 VOLUME  ["/ssh/id_rsa"]
@@ -52,4 +50,4 @@ VOLUME  ["/ssh/id_rsa"]
 # export port
 EXPOSE 3000
 
-CMD /opt/fleet-ui/start.sh
+CMD eval `ssh-agent -s` && ssh-add /ssh/id_rsa && /gopath/bin/fleet-ui

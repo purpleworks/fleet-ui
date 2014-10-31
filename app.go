@@ -17,6 +17,10 @@ func main() {
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
+	// machines collection
+	machines := api.Path("/machines").Subrouter()
+	machines.Methods("GET").HandlerFunc(machineAllHandler)
+
 	// Units collection
 	units := api.Path("/units").Subrouter()
 	units.Methods("GET").HandlerFunc(statusAllHandler)
@@ -32,6 +36,12 @@ func main() {
 	n.UseHandler(r)
 
 	n.Run(":3000")
+}
+
+func machineAllHandler(w http.ResponseWriter, req *http.Request) {
+	fleetClient := fleetClientPkg.NewClientCLIWithPeer("http://192.168.81.101:4001")
+	status, _ := fleetClient.MachineAll()
+	renderer.JSON(w, http.StatusOK, status)
 }
 
 func statusAllHandler(w http.ResponseWriter, req *http.Request) {
