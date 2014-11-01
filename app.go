@@ -45,7 +45,7 @@ func main() {
 	// websocket
 	r.Path("/ws/journal/{id}").HandlerFunc(wsHandler)
 
-	n := negroni.New()
+	n := negroni.Classic()
 	n.UseHandler(r)
 
 	n.Run(":3000")
