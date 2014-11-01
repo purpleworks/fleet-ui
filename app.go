@@ -1,14 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"gopkg.in/unrolled/render.v1"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 var (
@@ -100,21 +101,32 @@ func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
 		os.Mkdir(tempDir, 0755)
 	}
 
-	tempFile, err := ioutil.TempFile(tempDir, name)
+	serviceFile := fmt.Sprintf("%s/%s", tempDir, name)
+	lines := strings.Split(string(service), "\\n")
+
+	fo, err := os.Create(serviceFile)
 	if err != nil {
-		log.Println(err)
-	}
-	err = ioutil.WriteFile(tempFile.Name(), []byte(service), 0644)
-	if err != nil {
-		log.Printf("Write file errpr: %s", err)
+		log.Printf("Open file errpr: %s", err)
 		renderer.JSON(w, http.StatusBadRequest, err)
 		return
 	}
-	// err = fleetClient.Submit(name, tempFile.Name())
-	// if err != nil {
-	// 	log.Printf("Fleet submit error: %s", err)
-	// 	renderer.JSON(w, http.StatusBadRequest, err)
-	// }
+
+	defer func() {
+		if err := fo.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	for _, str := range lines {
+		fmt.Fprintln(fo, str)
+	}
+
+	err = fleetClient.Submit(name, serviceFile)
+	if err != nil {
+		log.Printf("Fleet submit error: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
 	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
