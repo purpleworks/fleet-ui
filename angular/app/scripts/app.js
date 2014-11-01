@@ -38,7 +38,12 @@ angular
           url: '/',
           templateUrl: _t('/views/main.html'),
           controller: 'MainCtrl'
-        });
+        })
+          .state('root.main.unit', {
+            url: 'unit?name',
+            templateUrl: _t('/views/unit.html'),
+            controller: 'UnitCtrl'
+          });
   })
   .run(function($rootScope, $state, $stateParams) {
     // set default root scope value

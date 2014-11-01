@@ -1,0 +1,9 @@
+@mixin sans-font($weight) {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: $weight;
+}
+
+@mixin long-text() {
+  word-break: break-all;
+  word-wrap: break-word;
+}
