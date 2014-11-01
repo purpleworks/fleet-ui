@@ -1,6 +1,7 @@
 @charset 'UTF-8';
 
 @import 'bootstrap-custom';
+@import 'util';
 
 $header-height:44px;
 $header-background-color: rgba(255, 255, 255, .9);
@@ -320,4 +321,126 @@ footer {
   right: 0;
   top: 0;
   bottom: 0;
+}
+
+
+body {
+  background-color: #eaedf2;
+}
+
+.title {
+  @include sans-font(600);
+  background-color: #2a323d;
+  padding: 20px;
+  font-size: 20px;
+  color: #e74c3c;
+}
+
+.machine-list {
+  list-style: none;
+  margin: 0;
+  padding: 20px 10px;
+
+  li.machine {
+    display: inline-block;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    position: relative;
+    vertical-align: top;
+
+    .machine-info {
+      @include long-text();
+      background-color: #fff;
+      width: 260px;
+
+      .machine-title {
+        @include sans-font(600);
+        font-size: 15px;
+        background-color: #6dc2c0;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .machine-desc {
+        padding: 10px;
+      }
+
+      .machine-ip {
+        @include sans-font(300);
+        background-color: #eee;
+        padding: 5px;
+      }
+
+      .machine-meta {
+        @include sans-font(300);
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.unit-list {
+  background-color: #77d5d4;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 10px;
+
+  li.unit {
+    padding: 0 10px;
+    position: relative;
+
+    .unit-info {
+      @include long-text();
+      display: block;
+      background-color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      color: #666;
+
+      &:hover {
+        background-color: #3b7170;
+        color: #fff;
+      }
+
+      .label {
+        background-color: #eee;
+      }
+
+      .label-running {
+        background-color: #18bc9c;
+      }
+
+      .label-dead {
+        background-color: #e74c3c;
+      }
+    }
+  }
+}
+
+.unit-wrapper {
+  .unit-title {
+    @include sans-font(600);
+    font-size:20px;
+    padding: 20px;
+    position: relative;
+
+    .close-btn {
+      position: absolute;
+      @include sans-font(300);
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+    }
+  }
+
+  .unit-log-wrapper {
+    padding: 20px;
+    .unit-log {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 10px;
+      height: 500px;
+      overflow: auto;
+    }
+  }
 }

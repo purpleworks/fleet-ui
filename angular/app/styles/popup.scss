@@ -1,0 +1,31 @@
+.popup-bg,
+.popup-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.popup-bg {
+  z-index: 98;
+  overflow: none;
+}
+
+.popup-wrapper {
+  z-index: 99;
+  overflow-x: auto;
+  overflow-y: scroll;
+
+  .popup {
+    z-index: 100;
+    position: absolute;
+    width: 800px;
+    margin-left: -400px;
+    top: 50px;
+    left: 50%;
+    background-color: #fff;
+    margin-bottom: 50px;
+  }
+}

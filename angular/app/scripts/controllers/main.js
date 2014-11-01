@@ -16,6 +16,18 @@ angular.module('fleetuiApp')
 
     $scope.unit = {
       loading: false,
-      items: unitService.query()
+      items: {}
     };
+
+    unitService.query(function(data) {
+      for(var i=0; i<data.length; i++) {
+        var unit = data[i];
+        var machineName = unit.Machine.split("/")[0];
+        if($scope.unit.items[machineName]) {
+          $scope.unit.items[machineName].push(unit);
+        } else {
+          $scope.unit.items[machineName] = [unit];
+        }
+      }
+    });
   });
