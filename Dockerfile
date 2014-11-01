@@ -2,7 +2,7 @@
 #   docker build -t purpleworks/fleet-ui .
 #
 # docker run
-#   docker run --rm -it -p 3000:3000 -v ~/.ssh/id_rsa:/ssh/id_rsa purpleworks/fleet-ui
+#   docker run --rm -it -p 3000:3000 -p 9000:9000 -v ~/.ssh/id_rsa:/ssh/id_rsa purpleworks/fleet-ui
 
 FROM dockerfile/ubuntu
 MAINTAINER jaehue@jang.io
@@ -47,5 +47,6 @@ VOLUME  ["/ssh/id_rsa"]
 
 # export port
 EXPOSE 3000
+EXPOSE 9000
 
 CMD eval `ssh-agent -s` && ssh-add /ssh/id_rsa && /gopath/bin/fleet-ui
