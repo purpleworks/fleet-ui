@@ -2,7 +2,7 @@
 #   docker build -t purpleworks/fleet-ui .
 #
 # docker run
-#   docker run --rm -it -p 3000:3000 -p 9000:9000 -v ~/.ssh/id_rsa:/ssh/id_rsa purpleworks/fleet-ui
+#   docker run --rm -it -p 3000:3000 -v ~/.ssh/id_rsa:/ssh/id_rsa purpleworks/fleet-ui
 
 FROM dockerfile/ubuntu
 MAINTAINER jaehue@jang.io
@@ -41,6 +41,7 @@ RUN \
 WORKDIR /gopath/src/github.com/jaehue/fleet-ui
 ADD . /gopath/src/github.com/jaehue/fleet-ui
 RUN go install
+RUN cp -r angular/app ./public/
 
 # Add VOLUME
 VOLUME  ["/ssh/id_rsa"]
