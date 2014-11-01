@@ -348,6 +348,10 @@ body {
     position: relative;
     vertical-align: top;
 
+    &.ng-enter {
+      animation: fadeIn .5s;
+    }
+
     .machine-info {
       @include long-text();
       background-color: #fff;
