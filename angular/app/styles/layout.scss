@@ -460,7 +460,8 @@ body {
     @include sans-font(600);
 
     .fa-play,
-    .fa-stop {
+    .fa-stop,
+    .fa-exclamation-triangle {
       color: #000;
       font-size: 12px;
     }

@@ -82,4 +82,13 @@ angular.module('fleetuiApp')
         $scope.stopLoading = false;
       });
     };
+
+    $scope.forceStopUnit = function() {
+      $scope.forceStopLoading = true;
+      unitService.stop({ id:$state.params.name }, function(data) {
+        $scope.forceStopLoading = false;
+      }, function() {
+        $scope.forceStopLoading = false;
+      });
+    };
   });
