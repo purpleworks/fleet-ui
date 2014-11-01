@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"gopkg.in/unrolled/render.v1"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -31,6 +32,7 @@ func main() {
 	units := api.Path("/units").Subrouter()
 	units.Methods("GET").HandlerFunc(statusAllHandler)
 	units.Methods("POST").HandlerFunc(submitUnitHandler)
+	units.Path("upload").Methods("POST").HandlerFunc(uploadUnitHandler)
 
 	// Units singular
 	unit := api.PathPrefix("/units/{id}").Subrouter()
@@ -91,6 +93,35 @@ func loadHandler(w http.ResponseWriter, req *http.Request) {
 		// return
 	}
 	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
+func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
+	file, header, err := req.FormFile("file")
+	defer file.Close()
+
+	serviceFile := fmt.Sprintf("%s/%s", tempDir, header.Filename)
+	out, err := os.Create(serviceFile)
+	if err != nil {
+		log.Printf("Open file errpr: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+	defer out.Close()
+
+	// write the content from POST to the file
+	_, err = io.Copy(out, file)
+	if err != nil {
+		fmt.Fprintln(w, err)
+	}
+
+	err = fleetClient.Submit(header.Filename, serviceFile)
+	if err != nil {
+		// log.Printf("Fleet submit error: %s", err)
+		// renderer.JSON(w, http.StatusBadRequest, err)
+		// return
+	}
+	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+
 }
 
 func submitUnitHandler(w http.ResponseWriter, req *http.Request) {

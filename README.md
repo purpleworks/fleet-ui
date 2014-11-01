@@ -68,8 +68,20 @@ $ curl http://localhost:3000/api/v1/units
 전체  machine 목록 조회
 - [GET] /api/v1/units  
 전체  unit 목록 조회
+- [POST] /api/v1/units  
+service unit 등록(필수 파라미터: name, service)
+- [POST] /api/v1/units/upload  
+service unit file 업로드 & 등록(필수 파라미터: file 객체)
 - [GET] /api/v1/units/{unit-name}  
 특정 unit 조회
+- [DELETE] /api/v1/units/{unit-name}  
+특정 unit 제거
+- [POST] /api/v1/units/{unit-name}/start  
+특정 unit 시작
+- [POST] /api/v1/units/{unit-name}/stop  
+특정 unit 중지
+- [POST] /api/v1/units/{unit-name}/load  
+특정 unit 로드
 
 ### Web socket
 
