@@ -34,6 +34,10 @@ func main() {
 	// Units singular
 	unit := api.PathPrefix("/units/{id}").Subrouter()
 	unit.Methods("GET").HandlerFunc(statusHandler)
+	unit.Methods("DELETE").HandlerFunc(destroyHandler)
+	unit.Path("/start").Methods("POST").HandlerFunc(startHandler)
+	unit.Path("/stop").Methods("POST").HandlerFunc(stopHandler)
+	unit.Path("/load").Methods("POST").HandlerFunc(loadHandler)
 
 	// websocket
 	r.Path("/ws/journal/{id}").HandlerFunc(wsHandler)
@@ -43,6 +47,51 @@ func main() {
 
 	n.Run(":3000")
 }
+
+func destroyHandler(w http.ResponseWriter, req *http.Request) {
+	key := mux.Vars(req)["id"]
+	log.Printf("destroy %s unit", key)
+	if err := fleetClient.Destroy(key); err != nil {
+		log.Printf("unit destroy error: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
+func startHandler(w http.ResponseWriter, req *http.Request) {
+	key := mux.Vars(req)["id"]
+	log.Printf("start %s unit", key)
+	if err := fleetClient.Start(key); err != nil {
+		log.Printf("unit start error: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
+func stopHandler(w http.ResponseWriter, req *http.Request) {
+	key := mux.Vars(req)["id"]
+	log.Printf("stop %s unit", key)
+	if err := fleetClient.Stop(key); err != nil {
+		log.Printf("unit stop error: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
+func loadHandler(w http.ResponseWriter, req *http.Request) {
+	key := mux.Vars(req)["id"]
+	log.Printf("load %s unit", key)
+	if err := fleetClient.Load(key); err != nil {
+		log.Printf("unit load error: %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+	renderer.JSON(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
 func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
 	name := req.FormValue("name")
 	service := req.FormValue("service")
@@ -59,6 +108,7 @@ func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Printf("Write file errpr: %s", err)
 		renderer.JSON(w, http.StatusBadRequest, err)
+		return
 	}
 	// err = fleetClient.Submit(name, tempFile.Name())
 	// if err != nil {
