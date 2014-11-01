@@ -410,6 +410,11 @@ body {
         background-color: #18bc9c;
       }
 
+      .label-start-pre,
+      .label-stop {
+        background-color: #3498db;
+      }
+
       .label-dead {
         background-color: #e74c3c;
       }
@@ -418,6 +423,23 @@ body {
 }
 
 .unit-wrapper {
+  .label {
+    background-color: #eee;
+  }
+
+  .label-running {
+    background-color: #18bc9c;
+  }
+
+  .label-start-pre,
+  .label-stop {
+    background-color: #3498db;
+  }
+
+  .label-dead {
+    background-color: #e74c3c;
+  }
+
   .unit-title {
     @include sans-font(600);
     font-size:20px;
@@ -433,14 +455,33 @@ body {
     }
   }
 
+  .unit-control {
+    padding: 0 20px;
+    @include sans-font(600);
+
+    .fa-play,
+    .fa-stop {
+      color: #000;
+      font-size: 12px;
+    }
+  }
+
   .unit-log-wrapper {
     padding: 20px;
+
     .unit-log {
-      background-color: #2c3e50;
-      color: #ecf0f1;
+      @include sans-font(300);
+      background-color: #333;
+      color: #fff;
       padding: 10px;
       height: 500px;
       overflow: auto;
+
+      .log {
+        font-size: 12px;
+        padding: 3px 0;
+        @include long-text();
+      }
     }
   }
 }

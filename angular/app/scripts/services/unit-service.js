@@ -9,7 +9,20 @@
  */
 angular.module('fleetuiApp')
   .service('unitService', function unitService($resource) {
-    return $resource('/api/v1/units/:id', {
+    return $resource('/api/v1/units/:collection_action/:id/:member_action', {
       id: '@id'
+    }, {
+      start: {
+        method: 'POST',
+        params: {
+          member_action: 'start'
+        }
+      },
+      stop: {
+        method: 'POST',
+        params: {
+          member_action: 'stop'
+        }
+      }
     });
   });
