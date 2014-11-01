@@ -4,7 +4,11 @@
       <div class="machine-title">{{ machine.Machine }}</div>
       <div class="machine-desc">
         <span class="machine-ip">{{ machine.IPAddress }}</span>
-        <div class="machine-meta">{{ machine.Metadata }}</div>
+        <div class="machine-meta">
+          <div ng-repeat="metadata in machine.Metadata.split(',')">
+            {{ metadata }}
+          </div>
+        </div>
       </div>
       <ul class="unit-list unstyled clearfix">
         <li class="unit" ng-repeat="unit in unit.items[machine.Machine] | orderBy:'Unit'">

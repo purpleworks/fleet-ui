@@ -8,7 +8,7 @@
  * Controller of the fleetuiApp
  */
 angular.module('fleetuiApp')
-  .controller('MainCtrl', function ($scope, machineService, unitService) {
+  .controller('MainCtrl', function ($scope, $interval, machineService, unitService) {
     $scope.machine = {
       loading: false,
       items: machineService.query()
@@ -19,15 +19,21 @@ angular.module('fleetuiApp')
       items: {}
     };
 
-    unitService.query(function(data) {
-      for(var i=0; i<data.length; i++) {
-        var unit = data[i];
-        var machineName = unit.Machine.split("/")[0];
-        if($scope.unit.items[machineName]) {
-          $scope.unit.items[machineName].push(unit);
-        } else {
-          $scope.unit.items[machineName] = [unit];
+    function getUnitsInfo(init) {
+      unitService.query(function(data) {
+        $scope.unit.items = {};
+        for(var i=0; i<data.length; i++) {
+          var unit = data[i];
+          var machineName = unit.Machine.split("/")[0];
+          if($scope.unit.items[machineName]) {
+            $scope.unit.items[machineName].push(unit);
+          } else {
+            $scope.unit.items[machineName] = [unit];
+          }
         }
-      }
-    });
+      });
+    }
+
+    $interval(getUnitsInfo, 5000);
+    getUnitsInfo();
   });

@@ -5,12 +5,39 @@
     <div class="popup">
       <div class="unit-title">
         {{ unit.Unit }}
+        <span class="label label-{{ unit.Sub }}">{{ unit.Sub }}</span>
         <a class="close-btn" ui-sref="root.main">&times;</a>
+      </div>
+
+      <div class="unit-control">
+        <a class="btn btn-primary" ladda="startLoading" ng-disabled="unit.Sub == 'running'" ng-click="startUnit()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-play fa-stack-1x fa-inverse"></i>
+          </span>
+          start
+        </a>
+        <a class="btn btn-warning" ladda="stopLoading" ng-disabled="unit.Sub != 'running'" ng-click="stopUnit()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-stop fa-stack-1x fa-inverse"></i>
+          </span>
+          stop
+        </a>
+        <a class="btn btn-danger" ladda="forceStopLoading" ng-click="forceStopUnit()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-exclamation-triangle fa-stack-1x fa-inverse"></i>
+          </span>
+          force stop
+        </a>
       </div>
 
       <div class="unit-log-wrapper">
         <div class="unit-log">
-          1234
+          <div class="log" ng-repeat="log in logs track by $index">
+            {{ log }}
+          </div>
         </div>
       </div>
     </div>

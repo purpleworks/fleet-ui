@@ -16,7 +16,9 @@ angular
     'ngResource',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'angular-websocket',
+    'angular-ladda'
   ])
   .config(function ($stateProvider, $urlRouterProvider, CACHE_VERSION) {
     // prevent view cache helper
