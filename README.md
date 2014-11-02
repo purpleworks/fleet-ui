@@ -1,6 +1,12 @@
 fleet-ui
 ========
 
+Web based UI for [fleet](https://github.com/coreos/fleet)
+
+![fleet-ui machine list](images/screenshot.png "fleet-ui machine list")
+
+![fleet-ui unit detail](images/screenshot2.png "fleet-ui unit detail")
+
 ## Prerequire
 
 ### go 설치
