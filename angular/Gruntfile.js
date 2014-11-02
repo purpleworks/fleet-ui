@@ -420,8 +420,9 @@ module.exports = function (grunt) {
     ngconstant: {
       options: {
         name: 'config',
-        dest: 'app/scripts/config.js',
+        dest: '<%= yeoman.dist %>/scripts/config.js',
         constants: {
+          'ENVIRONMENT': 'production',
           'CACHE_VERSION': '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
         }
       },
@@ -461,7 +462,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'ngconstant:build',
     'clean:dist',
     'wiredep',
     'useminPrepare',
@@ -470,6 +470,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'ngconstant:build',
     'cdnify',
     'cssmin',
     'uglify',
