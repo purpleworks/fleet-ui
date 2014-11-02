@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/juju/errgo"
-	execPkg "os/exec"
+	"os/exec"
 )
 
 const (
@@ -26,8 +26,8 @@ func NewClientCLIWithPeer(etcdPeer string) FleetClient {
 }
 
 func (this *ClientCLI) Submit(name, filePath string) error {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "submit", filePath)
-	_, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "submit", filePath)
+	_, err := execCmd(cmd)
 
 	if err != nil {
 		return errgo.Mask(err)
@@ -37,8 +37,8 @@ func (this *ClientCLI) Submit(name, filePath string) error {
 }
 
 func (this *ClientCLI) Start(name string) error {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "start", "--no-block=true", name)
-	_, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "start", "--no-block=true", name)
+	_, err := execCmd(cmd)
 
 	if err != nil {
 		return errgo.Mask(err)
@@ -48,8 +48,8 @@ func (this *ClientCLI) Start(name string) error {
 }
 
 func (this *ClientCLI) Stop(name string) error {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "stop", "--no-block=true", name)
-	_, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "stop", "--no-block=true", name)
+	_, err := execCmd(cmd)
 
 	if err != nil {
 		return errgo.Mask(err)
@@ -59,8 +59,8 @@ func (this *ClientCLI) Stop(name string) error {
 }
 
 func (this *ClientCLI) Load(name string) error {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "load", "--no-block=true", name)
-	_, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "load", "--no-block=true", name)
+	_, err := execCmd(cmd)
 
 	if err != nil {
 		return errgo.Mask(err)
@@ -70,8 +70,8 @@ func (this *ClientCLI) Load(name string) error {
 }
 
 func (this *ClientCLI) Destroy(name string) error {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "destroy", name)
-	_, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "destroy", name)
+	_, err := execCmd(cmd)
 
 	if err != nil {
 		return errgo.Mask(err)
