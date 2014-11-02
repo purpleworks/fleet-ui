@@ -45,6 +45,11 @@ angular
             url: 'unit?name',
             templateUrl: _t('/views/unit.html'),
             controller: 'UnitCtrl'
+          })
+          .state('root.main.new_unit', {
+            url: 'unit/new',
+            templateUrl: _t('/views/new-unit.html'),
+            controller: 'NewUnitCtrl'
           });
   })
   .run(function($rootScope, $state, $stateParams) {

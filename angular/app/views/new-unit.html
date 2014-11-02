@@ -1,0 +1,29 @@
+<div class="new-unit-wrapper">
+  <div class="popup-bg">
+  </div>
+  <div class="popup-wrapper" ng-click="closePopup($event)">
+    <div class="popup">
+      <div class="unit-title">
+        <span class="label label-{{ unit.Sub }}">{{ unit.Sub }}</span>
+        New Unit
+        <a class="close-btn" ui-sref="root.main">&times;</a>
+      </div>
+
+      <form name="newUnitForm">
+        <div class="unit-editor-wrapper">
+          <input type="text" class="form-control" ng-model="newUnit.name">
+        </div>
+        <div class="unit-editor-wrapper">
+          <textarea class="unit-editor" ng-model="newUnit.service">[Unit]
+          </textarea>
+        </div>
+
+        <div class="new-unit-control">
+          <a class="btn btn-primary" ng-click="newUnit.submit()">
+            Start new unit
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

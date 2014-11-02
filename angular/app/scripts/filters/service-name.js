@@ -11,6 +11,10 @@
 angular.module('fleetuiApp')
   .filter('serviceName', function () {
     return function (input) {
-      return input.substring(0, input.lastIndexOf('.service'));
+      if(input) {
+        return input.substring(0, input.lastIndexOf('.service'));
+      } else {
+        return null;
+      }
     };
   });

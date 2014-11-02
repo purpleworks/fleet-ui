@@ -1,0 +1,41 @@
+@charset 'UTF-8';
+
+@import 'util';
+
+.new-unit-wrapper {
+  .unit-title {
+    @include sans-font(600);
+    font-size:20px;
+    position: relative;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 20px;
+
+    .close-btn {
+      position: absolute;
+      @include sans-font(300);
+      top: 0;
+      right: 20px;
+      font-size: 40px;
+    }
+  }
+
+  .unit-editor-wrapper {
+    padding: 20px 20px 0;
+
+    .unit-editor {
+      @include sans-font(300);
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      width: 100%;
+      height: 500px;
+      overflow: auto;
+      font-size: 12px;
+    }
+  }
+
+  .new-unit-control {
+    padding: 20px;
+  }
+}
