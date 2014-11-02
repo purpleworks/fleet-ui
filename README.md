@@ -41,6 +41,7 @@ run web server
 ```
 $ cd angular
 $ npm install
+$ bower install
 $ grunt serve
 ```
 
