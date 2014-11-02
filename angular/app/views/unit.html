@@ -5,7 +5,7 @@
     <div class="popup">
       <div class="unit-title">
         <span class="label label-{{ unit.Sub }}">{{ unit.Sub }}</span>
-        {{ unit.Unit }}
+        {{ unit.Unit | serviceName }}
         <a class="close-btn" ui-sref="root.main">&times;</a>
       </div>
 
@@ -30,6 +30,12 @@
             <i class="fa fa-exclamation-triangle fa-stack-1x fa-inverse"></i>
           </span>
           force stop
+        </a>
+        <a class="btn btn-default pull-right" ladda="destroyLoading" ng-click="destroyUnit()">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+          </span>
         </a>
       </div>
 

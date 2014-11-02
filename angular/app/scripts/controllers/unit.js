@@ -85,6 +85,17 @@ angular.module('fleetuiApp')
       });
     };
 
+    $scope.destroyUnit = function() {
+      $scope.destroyLoading = true;
+      if(confirm('Destroy service?')) {
+        unitService.remove({ id:$state.params.name }, function(data) {
+          $scope.destroyLoading = false;
+        }, function() {
+          $scope.destroyLoading = false;
+        });
+      }
+    }
+
     if(ENVIRONMENT == 'dev') {
       WebSocket.new('ws://' + $location.host() + ':3000' + '/ws/journal/' + unitName);
     } else {
