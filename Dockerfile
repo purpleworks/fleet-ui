@@ -41,6 +41,7 @@ RUN \
 WORKDIR /gopath/src/github.com/jaehue/fleet-ui
 ADD . /gopath/src/github.com/jaehue/fleet-ui
 RUN go install
+RUN cp -r angular/dist ./public/
 
 # Add VOLUME
 VOLUME  ["/ssh/id_rsa"]
