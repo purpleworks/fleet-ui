@@ -7,6 +7,8 @@ Web based UI for [fleet](https://github.com/coreos/fleet)
 
 ![fleet-ui unit detail](images/screenshot2.png "fleet-ui unit detail")
 
+![fleet-ui new unit](images/screenshot3.png "fleet-ui new unit")
+
 ## Usage
 
 ### build
