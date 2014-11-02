@@ -4,13 +4,13 @@ package main
 import (
 	"bufio"
 	"fmt"
-	execPkg "os/exec"
+	"os/exec"
 	"strings"
 )
 
 func (this *ClientCLI) StatusAll() ([]UnitStatus, error) {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "list-units", "--full=true", "-l=true", "--fields=unit,load,active,sub,machine")
-	stdout, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "list-units", "--full=true", "-l=true", "--fields=unit,load,active,sub,machine")
+	stdout, err := execCmd(cmd)
 	if err != nil {
 		return []UnitStatus{}, err
 	}
@@ -64,8 +64,8 @@ func (this *ClientCLI) StatusUnit(name string) (UnitStatus, error) {
 }
 
 func (this *ClientCLI) JournalF(name string) (chan string, error) {
-	cmdY := execPkg.Command("echo", "y")
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "journal", "-f", name)
+	cmdY := exec.Command("echo", "y")
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "journal", "-f", name)
 
 	cmd.Stdin, _ = cmdY.StdoutPipe()
 	stdout, err := cmd.StdoutPipe()
@@ -88,8 +88,8 @@ func (this *ClientCLI) JournalF(name string) (chan string, error) {
 }
 
 func (this *ClientCLI) MachineAll() ([]MachineStatus, error) {
-	cmd := execPkg.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "list-machines", "--full=true")
-	stdout, err := exec(cmd)
+	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "list-machines", "--full=true")
+	stdout, err := execCmd(cmd)
 	if err != nil {
 		return []MachineStatus{}, err
 	}

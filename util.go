@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	execPkg "os/exec"
+	"os/exec"
 	"strings"
 )
 
@@ -18,7 +18,7 @@ func GetMachineIP(unitMachine string) string {
 	return fields[1]
 }
 
-func exec(cmd *execPkg.Cmd) (string, error) {
+func execCmd(cmd *exec.Cmd) (string, error) {
 	var (
 		stdout bytes.Buffer
 		stderr bytes.Buffer
