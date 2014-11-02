@@ -7,9 +7,32 @@ Web based UI for [fleet](https://github.com/coreos/fleet)
 
 ![fleet-ui unit detail](images/screenshot2.png "fleet-ui unit detail")
 
+## Usage
+
+#### run in docker
+
+```
+$ docker build -t purpleworks/fleet-ui .
+$ docker run --rm -it -p 3000:3000 -e ETCD_PEER=[your_etcd_peer_ip] -v [your_ssh_private_key_file_path]:/ssh/id_rsa purpleworks/fleet-ui
+```
+
+#### run in local dev environment
+run api server
+```
+$ go install
+$ fleet-ui -etcd-peer=[your_etcd_peer_ip]
+```
+run web server
+
+```
+$ cd angular
+$ npm install
+$ grunt serve
+```
+
 ## Prerequire
 
-### go 설치
+#### go 설치
 
 go가 설치되어 있지 않다면, 아래 페이지를 참고하여 go 환경을 설정한다
 https://golang.org/doc/install
@@ -27,7 +50,7 @@ $ echo $GOPATH
 /Users/your_name/workspace/go
 ```
 
-### workspace 구성
+#### workspace 구성
 
 workspace($GOPATH)에 자신의 github 계정으로 fork한 fleet-ui 소스를 내려받는다.
 
@@ -54,13 +77,13 @@ src/
 
 ## 실행
 
-### web server 실행
+#### web server 실행
 
 ```
 $ go install && fleet-ui
 ```
 
-### rest api 확인
+#### rest api 확인
 
 ```
 $ curl http://localhost:3000/api/v1/units
@@ -68,7 +91,7 @@ $ curl http://localhost:3000/api/v1/units
 
 ## API 정보
 
-### REST API
+#### REST API
 
 - [GET] /api/v1/machines  
 전체  machine 목록 조회
@@ -89,7 +112,7 @@ service unit file 업로드 & 등록(필수 파라미터: file 객체)
 - [POST] /api/v1/units/{unit-name}/load  
 특정 unit 로드
 
-### Web socket
+#### Web socket
 
 - ws://ws/journal/{unit-name}
 특정 unit journal 조회
