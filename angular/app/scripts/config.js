@@ -1,5 +1,5 @@
-angular.module("config", [])
+angular.module('config', [])
 
-  .constant("CACHE_VERSION", "1405502845754472807")
+.constant('CACHE_VERSION', '1414920683024802902')
 
 ;
