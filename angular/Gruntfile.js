@@ -175,7 +175,7 @@ module.exports = function (grunt) {
     // Add vendor prefixed styles
     autoprefixer: {
       options: {
-        browsers: ['last 1 version']
+        browsers: ['last 3 version']
       },
       dist: {
         files: [{
@@ -378,7 +378,10 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.',
-          src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
+          src: [
+            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
+            'bower_components/font-awesome/fonts/*'
+          ],
           dest: '<%= yeoman.dist %>'
         }]
       },
@@ -410,6 +413,20 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      }
+    },
+
+    // angular 정적/동적 변수 할당
+    ngconstant: {
+      options: {
+        name: 'config',
+        dest: '<%= yeoman.dist %>/scripts/config.js',
+        constants: {
+          'ENVIRONMENT': 'production',
+          'CACHE_VERSION': '<%= ((new Date()).valueOf().toString()) + (Math.floor((Math.random()*1000000)+1).toString()) %>'
+        }
+      },
+      build: {
       }
     }
   });
@@ -453,6 +470,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'ngconstant:build',
     'cdnify',
     'cssmin',
     'uglify',

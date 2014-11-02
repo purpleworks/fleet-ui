@@ -4,8 +4,10 @@
 # docker run
 #   docker run --rm -it -p 3000:3000 -v ~/.ssh/id_rsa:/ssh/id_rsa purpleworks/fleet-ui
 
-FROM dockerfile/ubuntu
-MAINTAINER jaehue@jang.io
+FROM ubuntu:14.04
+MAINTAINER app@purpleworks.co.kr
+
+ENV DEBIAN_FRONTEND noninteractive 
 
 # update ubuntu latest
 RUN \
@@ -41,7 +43,7 @@ RUN \
 WORKDIR /gopath/src/github.com/jaehue/fleet-ui
 ADD . /gopath/src/github.com/jaehue/fleet-ui
 RUN go install
-RUN cp -r angular/app ./public/
+RUN cp -r angular/dist ./public/
 
 # Add VOLUME
 VOLUME  ["/ssh/id_rsa"]

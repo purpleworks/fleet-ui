@@ -1,6 +1,12 @@
 fleet-ui
 ========
 
+Web based UI for [fleet](https://github.com/coreos/fleet)
+
+![fleet-ui machine list](images/screenshot.png "fleet-ui machine list")
+
+![fleet-ui unit detail](images/screenshot2.png "fleet-ui unit detail")
+
 ## Prerequire
 
 ### go 설치
@@ -87,3 +93,11 @@ service unit file 업로드 & 등록(필수 파라미터: file 객체)
 
 - ws://ws/journal/{unit-name}
 특정 unit journal 조회
+
+## Contributing
+
+1. Fork it ( https://github.com/purpleworks/fleet-ui/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request

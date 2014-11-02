@@ -1,0 +1,93 @@
+@charset 'UTF-8';
+
+@import 'util';
+
+.machine-list {
+  list-style: none;
+  margin: 0;
+  padding: 20px 10px;
+
+  li.machine {
+    display: inline-block;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    position: relative;
+    vertical-align: top;
+
+    &.ng-enter {
+      animation: fadeIn .5s;
+    }
+
+    .machine-info {
+      @include long-text();
+      background-color: #fff;
+      width: 300px;
+
+      .machine-title {
+        @include sans-font(600);
+        font-size: 14px;
+        background-color: #6dc2c0;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .machine-desc {
+        padding: 10px;
+      }
+
+      .machine-ip {
+        @include sans-font(300);
+        background-color: #eee;
+        padding: 5px 10px;
+      }
+
+      .machine-meta {
+        @include sans-font(300);
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.unit-list {
+  background-color: #77d5d4;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 10px;
+
+  li.unit {
+    padding: 0 10px;
+    position: relative;
+
+    .unit-info {
+      @include long-text();
+      display: block;
+      background-color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      color: #666;
+
+      &:hover {
+        background-color: #3b7170;
+        color: #fff;
+      }
+
+      .label {
+        background-color: #eee;
+      }
+
+      .label-running {
+        background-color: #18bc9c;
+      }
+
+      .label-start-pre,
+      .label-stop {
+        background-color: #3498db;
+      }
+
+      .label-dead {
+        background-color: #e74c3c;
+      }
+    }
+  }
+}

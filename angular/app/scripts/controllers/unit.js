@@ -8,22 +8,16 @@
  * Controller of the fleetuiApp
  */
 angular.module('fleetuiApp')
-  .controller('UnitCtrl', function ($scope, $state, $location, $timeout, unitService, WebSocket) {
+  .controller('UnitCtrl', function ($scope, $state, $location, $timeout, unitService, WebSocket, ENVIRONMENT) {
+    var unitName = $state.params.name;
+
     var timer = null;
 
     $scope.logs = [];
 
-    function getUnitInfo(init) {
-      unitService.get({ id:$state.params.name }, function(data) {
+    function getUnitInfo() {
+      unitService.get({ id: unitName }, function(data) {
         $scope.unit = data;
-
-        if(init) {
-          WebSocket.new('ws://' + $location.host() + ':3000' + '/ws/journal/' + data.Unit);
-          setCallback();
-          $scope.$on("$destroy", function () {
-            WebSocket.close();
-          });
-        }
 
         if(timer) {
           $timeout.cancel(timer)
@@ -34,8 +28,7 @@ angular.module('fleetuiApp')
       });
     }
 
-    getUnitInfo(true);
-
+    getUnitInfo();
     $scope.$on("$destroy", function() {
       $timeout.cancel(timer);
     });
@@ -91,4 +84,14 @@ angular.module('fleetuiApp')
         $scope.forceStopLoading = false;
       });
     };
+
+    if(ENVIRONMENT == 'dev') {
+      WebSocket.new('ws://' + $location.host() + ':3000' + '/ws/journal/' + unitName);
+    } else {
+      WebSocket.new('ws://' + $location.host() + ':' + $location.port() + '/ws/journal/' + unitName);
+    }
+    setCallback();
+    $scope.$on('$destroy', function () {
+      WebSocket.close();
+    });
   });
