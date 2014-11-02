@@ -1,20 +1,34 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"gopkg.in/unrolled/render.v1"
+	"os"
 )
 
 var (
-	renderer    *render.Render
-	fleetClient FleetClient
-	tempDir     string
+	renderer     *render.Render
+	fleetClient  FleetClient
+	tempDir      string
+	etcdPeer     string
+	etcdPeerFlag = flag.String("etcd-peer", "localhost", "ETCD_PEER")
 )
 
 func init() {
+	// parse command argument
+	flag.Parse()
+	if v := os.Getenv("ETCD_PEER"); v != "" {
+		etcdPeer = v
+	} else {
+		etcdPeer = *etcdPeerFlag
+	}
+
+	// init global variables
 	renderer = render.New(render.Options{})
-	fleetClient = NewClientCLIWithPeer("http://192.168.81.101:4001")
+	fleetClient = NewClientCLIWithPeer(fmt.Sprintf("http://%s:4001", etcdPeer))
 	tempDir = "./tmp"
 }
 
