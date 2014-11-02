@@ -2,7 +2,8 @@
 #   docker build -t purpleworks/fleet-ui .
 #
 # docker run
-#   docker run --rm -it -p 3000:3000 -v ~/.ssh/id_rsa:/root/id_rsa purpleworks/fleet-ui
+#   docker run --rm -p [port]:3000 -e ETCD_PEER=[your_etcd_peer_ip] -v [your_ssh_private_key_file_path]:/root/id_rsa purpleworks/fleet-ui
+#   docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa purpleworks/fleet-ui
 
 FROM ubuntu:14.04
 MAINTAINER app@purpleworks.co.kr
@@ -54,4 +55,4 @@ VOLUME  ["/root/id_rsa"]
 EXPOSE 3000
 
 # run!
-CMD run.sh
+CMD ./run.sh

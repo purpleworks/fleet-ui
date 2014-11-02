@@ -9,14 +9,28 @@ Web based UI for [fleet](https://github.com/coreos/fleet)
 
 ## Usage
 
-#### run in docker
+### build
 
 ```
+$ cd angular
+$ npm install
+$ bower install
+$ npm build
+$ cd ..
 $ docker build -t purpleworks/fleet-ui .
-$ docker run --rm -it -p 3000:3000 -e ETCD_PEER=[your_etcd_peer_ip] -v [your_ssh_private_key_file_path]:/ssh/id_rsa purpleworks/fleet-ui
 ```
 
-#### run in local dev environment
+### run in docker
+
+- -p `port`:3000
+- -e ETCD_PEER=[your_etcd_peer_ip]
+- -v [your_ssh_private_key_file_path]:/root/id_rsa
+
+```
+$ docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa purpleworks/fleet-ui
+```
+
+### run in local dev environment
 run api server
 ```
 $ go install
