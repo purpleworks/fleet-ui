@@ -14,7 +14,7 @@ var (
 	fleetClient  FleetClient
 	tempDir      string
 	etcdPeer     string
-	etcdPeerFlag = flag.String("etcd-peer", "localhost", "ETCD_PEER")
+	etcdPeerFlag = flag.String("etcd-peer", "172.17.42.1", "ETCD_PEER")
 )
 
 func init() {
