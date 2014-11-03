@@ -380,7 +380,9 @@ module.exports = function (grunt) {
           cwd: '.',
           src: [
             'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-            'bower_components/font-awesome/fonts/*'
+            'bower_components/font-awesome/fonts/*',
+            'bower_components/plupload/js/Moxie.swf',
+            'bower_components/plupload/js/Moxie.xap'
           ],
           dest: '<%= yeoman.dist %>'
         }]
@@ -392,7 +394,6 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
-
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [

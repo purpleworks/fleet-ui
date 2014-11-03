@@ -8,7 +8,7 @@
  * Controller of the fleetuiApp
  */
 angular.module('fleetuiApp')
-  .controller('NewUnitCtrl', function ($scope, $state, unitService) {
+  .controller('NewUnitCtrl', function ($scope, $state, $timeout, unitService) {
     $scope.newUnit = {
       isLoading: false,
       name: 'new-service.service',
@@ -33,4 +33,42 @@ angular.module('fleetuiApp')
         }
       }
     }
+
+    $scope.unitUpload = {
+      loading: false,
+      url: '/api/v1/units/upload',
+      options: {
+        container: 'unitUploadBtn',
+        multi_selection: false,
+        max_file_size: '6mb',
+        filters: {
+          mime_types : [
+            { title: "All files", extensions : "*" }
+          ]
+        }
+      },
+      callbacks: {
+        filesAdded: function(uploader, files) {
+          $scope.unitUpload.loading = true;
+          $timeout(function() { uploader.start() }, 1);
+        },
+        fileUploaded: function(uploader, file, response) {
+          $scope.unitUpload.loading = false;
+
+          if(response.response) {
+            var data = $.parseJSON(response.response);
+            console.log(data);
+          }
+        },
+        error: function(uploader, error) {
+          $scope.unitUpload.loading = false;
+
+          if(error.code == plupload.FILE_SIZE_ERROR) {
+            alert("최대 6mb까지 첨부가능합니다.");
+          } else {
+            alert(error.message);
+          }
+        }
+      }
+    };
   });

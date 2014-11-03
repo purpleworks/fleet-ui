@@ -23,7 +23,11 @@
       background-color: #fff;
       width: 300px;
 
-      .machine-title {
+      .machine-desc {
+        padding: 10px;
+      }
+
+      .machine-ip {
         @include sans-font(600);
         font-size: 14px;
         background-color: #6dc2c0;
@@ -31,14 +35,11 @@
         padding: 10px;
       }
 
-      .machine-desc {
-        padding: 10px;
-      }
-
-      .machine-ip {
+      .machine-name {
         @include sans-font(300);
         background-color: #eee;
         padding: 5px 10px;
+        font-size: 13px;
       }
 
       .machine-meta {

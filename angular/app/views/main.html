@@ -2,16 +2,23 @@
   <a class="btn btn-primary" ui-sref="root.main.new_unit">
     <i class="fa fa-file-code-o"></i> New Unit
   </a>
+  <div class="pull-right">
+    <div class="input-group search-input-wrapper">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <input type="text" class="form-control" placeholder="filter..." ng-model="filterText">
+    </div>
+  </div>
 </div>
 <ul class="machine-list unstyled clearfix">
+  {{ filterName }}
   <li class="machine" ng-repeat="machine in machine.items | orderBy:'IPAddress'">
     <div class="machine-info">
-      <div class="machine-title">
-        <i class="fa fa-circle"></i> {{ machine.Machine }}
+      <div class="machine-ip">
+        <i class="fa fa-sitemap"></i> {{ machine.IPAddress }}
       </div>
       <div class="machine-desc">
-        <div class="machine-ip">
-          <i class="fa fa-sitemap"></i> {{ machine.IPAddress }}
+        <div class="machine-name">
+          <i class="fa fa-desktop"></i> {{ machine.Machine }}
         </div>
         <div class="machine-meta" ng-hide="machine.Metadata == '-'">
           <div ng-repeat="metadata in machine.Metadata.split(',')">
@@ -20,7 +27,7 @@
         </div>
       </div>
       <ul class="unit-list unstyled clearfix">
-        <li class="unit" ng-repeat="unit in unit.items[machine.Machine] | orderBy:'Unit'">
+        <li class="unit" ng-repeat="unit in unit.items[machine.Machine] | filter:filterText | orderBy:'Unit'">
           <a ui-sref="root.main.unit({ name: unit.Unit })" class="unit-info">
             <span class="label label-{{ unit.Sub }}">{{ unit.Sub }}</span>
             {{ unit.Unit | serviceName }}

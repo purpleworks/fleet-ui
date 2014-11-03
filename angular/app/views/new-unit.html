@@ -22,6 +22,17 @@
           <a class="btn btn-primary" ng-click="newUnit.submit()">
             Start new unit
           </a>
+          OR
+          <div id="unitUploadBtn" class="upload-btn">
+            <a class="btn btn-default"
+               plupload="unitUpload.url"
+               plupload-options="unitUpload.options"
+               plupload-callbacks="unitUpload.callbacks"
+               ladda="unitUpload.loading"
+               data-spinner-color="#666666">
+              <i class="fa fa-cloud-upload"></i> Upload unitfile
+            </a>
+          </div>
         </div>
       </form>
     </div>
