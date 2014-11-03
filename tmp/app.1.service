@@ -1,0 +1,11 @@
+[Unit]
+Description=My Service 1
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm --name app1 busybox /bin/sh -c "while true; do echo Hello World; sleep 1; done"
+ExecStop=/usr/bin/docker kill app1
+
+[X-Fleet]
+X-Conflicts=app.*.service

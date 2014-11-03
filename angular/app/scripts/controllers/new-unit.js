@@ -43,7 +43,7 @@ angular.module('fleetuiApp')
         max_file_size: '6mb',
         filters: {
           mime_types : [
-            { title: "All files", extensions : "*" }
+            { title: "service file", extensions : "service" }
           ]
         }
       },
