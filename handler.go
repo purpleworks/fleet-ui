@@ -58,7 +58,18 @@ func loadHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
+	if _, err := os.Stat(tempDir); err != nil {
+		log.Printf("err: %s", err)
+	} else if os.IsNotExist(err) {
+		os.Mkdir(tempDir, 0755)
+	}
+
 	file, header, err := req.FormFile("file")
+	if err != nil {
+		log.Printf("read file error : %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
 	defer file.Close()
 
 	serviceFile := fmt.Sprintf("%s/%s", tempDir, header.Filename)
@@ -79,6 +90,11 @@ func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
 	err = fleetClient.Submit(header.Filename, serviceFile)
 	if err != nil {
 		// log.Printf("Fleet submit error: %s", err)
+		// renderer.JSON(w, http.StatusBadRequest, err)
+		// return
+	}
+	if err := fleetClient.Start(header.Filename); err != nil {
+		// log.Printf("unit start error: %s", err)
 		// renderer.JSON(w, http.StatusBadRequest, err)
 		// return
 	}

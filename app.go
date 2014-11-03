@@ -42,10 +42,10 @@ func main() {
 	machines.Methods("GET").HandlerFunc(machineAllHandler)
 
 	// routing units collection
-	units := api.Path("/units").Subrouter()
+	units := api.PathPrefix("/units").Subrouter()
+	units.Path("/upload").Methods("POST").HandlerFunc(uploadUnitHandler)
 	units.Methods("GET").HandlerFunc(statusAllHandler)
 	units.Methods("POST").HandlerFunc(submitUnitHandler)
-	units.Path("upload").Methods("POST").HandlerFunc(uploadUnitHandler)
 
 	// routing units singular
 	unit := api.PathPrefix("/units/{id}").Subrouter()
