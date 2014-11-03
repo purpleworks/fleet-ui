@@ -18,9 +18,10 @@ angular
     'ngTouch',
     'ui.router',
     'angular-websocket',
-    'angular-ladda'
+    'angular-ladda',
+    'angular-plupload'
   ])
-  .config(function ($stateProvider, $urlRouterProvider, CACHE_VERSION) {
+  .config(function ($stateProvider, $urlRouterProvider, pluploadOptionProvider, CACHE_VERSION) {
     // prevent view cache helper
     function _t(url) {
       return url + '?_cache=' + CACHE_VERSION;
@@ -51,6 +52,13 @@ angular
             templateUrl: _t('/views/new-unit.html'),
             controller: 'NewUnitCtrl'
           });
+
+    // Plupload 설정
+    /* jshint camelcase:false */
+    pluploadOptionProvider.setOptions({
+      flash_swf_url: '/bower_components/plupload/js/Moxie.swf',
+      silverlight_xap_url: '/bower_components/plupload/js/Moxie.xap'
+    });
   })
   .run(function($rootScope, $state, $stateParams) {
     // set default root scope value

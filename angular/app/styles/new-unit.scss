@@ -33,7 +33,7 @@
       color: #fff;
       padding: 20px;
       width: 100%;
-      height: 500px;
+      height: 300px;
       overflow: auto;
       font-size: 12px;
     }
@@ -41,5 +41,9 @@
 
   .new-unit-control {
     padding: 20px;
+  }
+
+  .upload-btn {
+    display: inline-block;
   }
 }
