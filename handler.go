@@ -26,7 +26,7 @@ func destroyHandler(w http.ResponseWriter, req *http.Request) {
 
 func startHandler(w http.ResponseWriter, req *http.Request) {
 	key := mux.Vars(req)["id"]
-	log.Printf("start %s unit", key)
+	log.Printf("start unit %s", key)
 	if err := fleetClient.Start(key); err != nil {
 		// log.Printf("unit start error: %s", err)
 		// renderer.JSON(w, http.StatusBadRequest, err)
@@ -48,7 +48,7 @@ func stopHandler(w http.ResponseWriter, req *http.Request) {
 
 func loadHandler(w http.ResponseWriter, req *http.Request) {
 	key := mux.Vars(req)["id"]
-	log.Printf("load %s unit", key)
+	log.Printf("load unit - %s", key)
 	if err := fleetClient.Load(key); err != nil {
 		// log.Printf("unit load error: %s", err)
 		// renderer.JSON(w, http.StatusBadRequest, err)
@@ -58,6 +58,7 @@ func loadHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
+	log.Println("upload unit")
 	if _, err := os.Stat(tempDir); err != nil {
 		log.Printf("err: %s", err)
 	} else if os.IsNotExist(err) {
@@ -103,6 +104,7 @@ func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
+	log.Println("submit unit")
 	type UnitForm struct {
 		Name    string `json:"name"`
 		Service string `json:"service"`
@@ -164,17 +166,20 @@ func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func machineAllHandler(w http.ResponseWriter, req *http.Request) {
+	log.Println("machine all")
 	status, _ := fleetClient.MachineAll()
 	renderer.JSON(w, http.StatusOK, status)
 }
 
 func statusAllHandler(w http.ResponseWriter, req *http.Request) {
+	log.Println("unit all")
 	status, _ := fleetClient.StatusAll()
 	renderer.JSON(w, http.StatusOK, status)
 }
 
 func statusHandler(w http.ResponseWriter, req *http.Request) {
 	key := mux.Vars(req)["id"]
+	log.Printf("unit detail - %s", key)
 	status, _ := fleetClient.StatusUnit(key)
 	renderer.JSON(w, http.StatusOK, status)
 }
