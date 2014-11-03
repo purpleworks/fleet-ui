@@ -57,7 +57,9 @@ angular.module('fleetuiApp')
 
           if(response.response) {
             var data = $.parseJSON(response.response);
-            console.log(data);
+            if(data.result == 'success') {
+              $state.go('root.main.unit', { name: file.name });
+            }
           }
         },
         error: function(uploader, error) {
