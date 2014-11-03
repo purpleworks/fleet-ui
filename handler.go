@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -85,15 +87,33 @@ func uploadUnitHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
-	name := req.FormValue("name")
-	service := req.FormValue("service")
+	type UnitForm struct {
+		Name    string `json:"name"`
+		Service string `json:"service"`
+	}
 
-	if _, err := os.Stat(tempDir); os.IsNotExist(err) {
+	body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Printf("read request body error : %s", err)
+		renderer.JSON(w, http.StatusBadRequest, err)
+		return
+	}
+
+	var t UnitForm
+	dec := json.NewDecoder(strings.NewReader(string(body)))
+	dec.Decode(&t)
+	if err != nil {
+		log.Printf("json decode error : %s", err)
+	}
+
+	if _, err := os.Stat(tempDir); err != nil {
+		log.Printf("err: %s", err)
+	} else if os.IsNotExist(err) {
 		os.Mkdir(tempDir, 0755)
 	}
 
-	serviceFile := fmt.Sprintf("%s/%s", tempDir, name)
-	lines := strings.Split(string(service), "\\n")
+	serviceFile := fmt.Sprintf("%s/%s", tempDir, t.Name)
+	lines := strings.Split(string(t.Service), "\\n")
 
 	fo, err := os.Create(serviceFile)
 	if err != nil {
@@ -112,9 +132,15 @@ func submitUnitHandler(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprintln(fo, str)
 	}
 
-	err = fleetClient.Submit(name, serviceFile)
+	err = fleetClient.Submit(t.Name, serviceFile)
 	if err != nil {
 		// log.Printf("Fleet submit error: %s", err)
+		// renderer.JSON(w, http.StatusBadRequest, err)
+		// return
+	}
+
+	if err := fleetClient.Start(t.Name); err != nil {
+		// log.Printf("unit start error: %s", err)
 		// renderer.JSON(w, http.StatusBadRequest, err)
 		// return
 	}
