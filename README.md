@@ -54,14 +54,13 @@ $ grunt serve
 
 ## Prerequire
 
-### go 설치
+### Install Go
 
-go가 설치되어 있지 않다면, 아래 페이지를 참고하여 go 환경을 설정한다
-https://golang.org/doc/install
-https://golang.org/doc/code.html#Organization
+- References:  
+https://golang.org/doc/install  
+https://golang.org/doc/code.html#Organization  
 
-정상적으로 설치한 후 아래와 같이 go 환경을 확인한다.
-
+- Check your environment
 ```
 $ go version
 go version go1.3 darwin/amd64
@@ -72,9 +71,10 @@ $ echo $GOPATH
 /Users/your_name/workspace/go
 ```
 
-### workspace 구성
 
-workspace($GOPATH)에 자신의 github 계정으로 fork한 fleet-ui 소스를 내려받는다.
+### Organize your workspace
+
+clone your forked github repository to workspace($GOPATH)
 
 ```
 $ mkdir $GOPATH/src/github.com
@@ -82,7 +82,7 @@ $ cd $GOPATH/src/github.com
 $ git clone git@github.com:your_name/fleet-ui.git
 ```
 
-최종적으로 아래와 같은 구조가 되도록 한다
+here's an example:
 ```
 bin/
 pkg/
