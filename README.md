@@ -56,11 +56,11 @@ $ grunt serve
 
 ### Install Go
 
-- References:  
-https://golang.org/doc/install  
-https://golang.org/doc/code.html#Organization  
+References:  
+- https://golang.org/doc/install  
+- https://golang.org/doc/code.html#Organization  
 
-- Check your environment
+Check your environment:
 ```
 $ go version
 go version go1.3 darwin/amd64
