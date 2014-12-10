@@ -48,9 +48,6 @@ ADD . /gopath/src/github.com/jaehue/fleet-ui
 RUN go install
 RUN cp -r angular/dist ./public/
 
-# Add VOLUME
-VOLUME  ["/root/id_rsa"]
-
 # export port
 EXPOSE 3000
 
