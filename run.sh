@@ -6,5 +6,5 @@ if [ -f /root/id_rsa ]; then
   eval `ssh-agent -s` && ssh-add /root/id_rsa
 fi
 
-/gopath/bin/fleet-ui
+/root/fleet-ui/fleet-ui
 

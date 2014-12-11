@@ -1,3 +1,7 @@
+## 0.1.2
+
+ * optimize docker image size (only 25MB)
+
 ## 0.1.1
 
  * fix run.sh
