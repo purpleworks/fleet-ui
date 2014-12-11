@@ -8,6 +8,9 @@
 FROM progrium/busybox
 MAINTAINER app@purpleworks.co.kr
 
+# install packages
+RUN opkg-install openssh-client-utils
+
 # add files
 ADD run.sh /root/fleet-ui/run.sh
 ADD tmp/fleet-ui /root/fleet-ui/fleet-ui

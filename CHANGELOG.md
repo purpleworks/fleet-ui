@@ -1,3 +1,7 @@
+## 0.1.3
+
+ * add ssh-util to docker image
+
 ## 0.1.2
 
  * optimize docker image size (only 25MB)
