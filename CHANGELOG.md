@@ -1,3 +1,9 @@
+# fleet-ui
+
+## 0.1.4
+
+  * update fleetctl to v0.9.0
+
 ## 0.1.3
 
  * add ssh-util to docker image
