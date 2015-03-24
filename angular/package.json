@@ -1,6 +1,8 @@
 {
   "name": "fleetui",
   "version": "0.0.0",
+  "description": "Fleet UI",
+  "repository": "https://github.com/xuwang/fleet-ui.git",
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.7.3",
