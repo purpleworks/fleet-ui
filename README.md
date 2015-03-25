@@ -32,7 +32,7 @@ docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa
 $ cd angular
 $ npm install
 $ bower install
-$ npm build
+$ grunt build
 $ cd ..
 $ docker build -t purpleworks/fleet-ui .
 ```
