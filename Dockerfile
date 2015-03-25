@@ -14,7 +14,7 @@ RUN opkg-install openssh-client-utils
 # add files
 ADD run.sh /root/fleet-ui/run.sh
 ADD tmp/fleet-ui /root/fleet-ui/fleet-ui
-ADD tmp/fleet-v0.9.0-linux-amd64/fleetctl /usr/local/bin/fleetctl
+ADD tmp/fleetctl /usr/local/bin/fleetctl
 ADD angular/dist /root/fleet-ui/public
 
 # set workdir
