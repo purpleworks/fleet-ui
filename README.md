@@ -23,12 +23,11 @@ docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa
 
 (2) enjoy!
 
-## Development
-
-### Prerequire
+## Prerequire
 
 - backend
   - [go](http://golang.org/doc/install)
+  - [fleetctl](https://github.com/coreos/fleet/releases)
 - frontend
   - [nodejs](https://nodejs.org/)
   - [yeoman](http://yeoman.io/)
@@ -37,7 +36,7 @@ docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa
   - [ruby](https://www.ruby-lang.org/en/downloads/)
   - [compass](http://compass-style.org/install/)
 
-### Organize your workspace
+## Organize your workspace
 
 clone your forked github repository to workspace($GOPATH)
 
@@ -66,14 +65,16 @@ src/
               (...)
 ```
 
-### run backend (api server)
+## Development
+
+### backend (api server)
 
 ```
 $ go install
 $ fleet-ui -etcd-peer=[your_etcd_peer_ip]
 ```
 
-## run frontend (web based ui)
+### frontend (web based ui)
 
 ```
 $ cd angular
