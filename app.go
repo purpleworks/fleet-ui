@@ -30,6 +30,9 @@ func init() {
 	renderer = render.New(render.Options{})
 	fleetClient = NewClientCLIWithPeer(fmt.Sprintf("http://%s:4001", etcdPeer))
 	tempDir = "./tmp"
+	if _, err := os.Stat(tempDir); os.IsNotExist(err) {
+		os.Mkdir(tempDir, 0755)
+	}
 }
 
 func main() {
