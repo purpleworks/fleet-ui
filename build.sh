@@ -9,9 +9,9 @@ echo "BUILD DOCKER IMAGE VERSION - "$DOCKER_IMAGE_VERSION
 
 # build angular
 cd angular
-#npm install
-#bower install
-#grunt build
+npm install
+bower install
+grunt build
 cd ..
 
 # build go app
