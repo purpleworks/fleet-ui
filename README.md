@@ -23,54 +23,19 @@ docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1 -v ~/.ssh/id_rsa:/root/id_rsa
 
 (2) enjoy!
 
+## Development
 
-## Usage
+### Prerequire
 
-### docker build
-
-```
-$ cd angular
-$ npm install
-$ bower install
-$ grunt build
-$ cd ..
-$ docker build -t purpleworks/fleet-ui .
-```
-
-### run in local dev environment
-run api server
-```
-$ go install
-$ fleet-ui -etcd-peer=[your_etcd_peer_ip]
-```
-run web server
-
-```
-$ cd angular
-$ npm install
-$ bower install
-$ grunt serve
-```
-
-## Prerequire
-
-### Install Go
-
-References:  
-- https://golang.org/doc/install  
-- https://golang.org/doc/code.html#Organization  
-
-Check your environment:
-```
-$ go version
-go version go1.3 darwin/amd64
-```
-
-```
-$ echo $GOPATH
-/Users/your_name/workspace/go
-```
-
+- backend
+  - [go](http://golang.org/doc/install)
+- frontend
+  - [nodejs](https://nodejs.org/)
+  - [yeoman](http://yeoman.io/)
+  - [grunt](http://gruntjs.com/)
+  - [bower](http://bower.io/)
+  - [ruby](https://www.ruby-lang.org/en/downloads/)
+  - [compass](http://compass-style.org/install/)
 
 ### Organize your workspace
 
@@ -91,10 +56,36 @@ src/
         your_name/
           fleet-ui/
               .git/
+              .dockerignore
+              .gitignore
+              CHANGELOG.md
               Dockerfile
               README.md
+              angular
               app.go
-              start.sh
+              (...)
+```
+
+### run backend (api server)
+
+```
+$ go install
+$ fleet-ui -etcd-peer=[your_etcd_peer_ip]
+```
+
+## run frontend (web based ui)
+
+```
+$ cd angular
+$ npm install
+$ bower install
+$ grunt server
+```
+
+## Build All
+
+```
+$ ./build.sh
 ```
 
 ## LINK

@@ -1,5 +1,9 @@
 # fleet-ui
 
+## 0.1.6
+  * fix tmp directory not found issue (#11)
+  * update build.sh 
+
 ## 0.1.5
   * change host ip
 
@@ -14,6 +18,6 @@
 
 ## 0.1.1
  * fix run.sh
- 
+
 ## 0.1.0
  * support no private key (fix #2)
