@@ -201,8 +201,19 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// write journal message
 	key := mux.Vars(r)["id"]
-	output, _ := fleetClient.JournalF(key)
-	for line := range output {
-		conn.WriteMessage(websocket.TextMessage, []byte(line))
+	stdout, errout, err := fleetClient.JournalF(key)
+	if err != nil {
+		conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("Error: %v", err)))
+		return
 	}
+	go func() {
+		for line := range stdout {
+			conn.WriteMessage(websocket.TextMessage, []byte(line))
+		}
+	}()
+	go func() {
+		for line := range errout {
+			conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("Error: %s", line)))
+		}
+	}()
 }

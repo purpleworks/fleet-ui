@@ -21,7 +21,7 @@ type FleetClient interface {
 	Destroy(name string) error
 	StatusUnit(name string) (UnitStatus, error)
 	StatusAll() ([]UnitStatus, error)
-	JournalF(name string) (chan string, error)
+	JournalF(name string) (chan string, chan string, error)
 	MachineAll() ([]MachineStatus, error)
 }
 
