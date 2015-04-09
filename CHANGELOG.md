@@ -1,5 +1,9 @@
 # fleet-ui
 
+## 0.1.10
+  * improve websocket error handling
+  * server source refactoring
+
 ## 0.1.9
   * improve error handling
 
