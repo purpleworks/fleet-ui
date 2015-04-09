@@ -64,9 +64,8 @@ func (this *ClientCLI) StatusUnit(name string) (UnitStatus, error) {
 	return UnitStatus{}, NewFleetClientError(ERROR_TYPE_NOT_FOUND, fmt.Sprintf("Cannot fetch status. Unit (%s) not found. Aborting...", name))
 }
 
-func (this *ClientCLI) JournalF(name string) (chan string, chan string, error) {
+func (this *ClientCLI) JournalF(name string) (outc, errc chan string, err error) {
 	var stdout, stderr io.ReadCloser
-	var err error
 
 	cmdY := exec.Command("echo", "y")
 	cmd := exec.Command(FLEETCTL, ENDPOINT_OPTION, this.etcdPeer, "journal", "-f", name)
@@ -74,27 +73,27 @@ func (this *ClientCLI) JournalF(name string) (chan string, chan string, error) {
 	cmd.Stdin, _ = cmdY.StdoutPipe()
 	stdout, err = cmd.StdoutPipe()
 	if err != nil {
-		return nil, nil, err
+		return
 	}
 
 	stderr, err = cmd.StderrPipe()
 	if err != nil {
-		return nil, nil, err
+		return
 	}
 
-	if err := cmd.Start(); err != nil {
-		return nil, nil, err
+	if err = cmd.Start(); err != nil {
+		return
 	}
 
 	cmdY.Run()
 
-	linec := make(chan string)
-	errc := make(chan string)
+	outc = make(chan string)
+	errc = make(chan string)
 
 	go func() {
 		scanner := bufio.NewScanner(stdout)
 		for scanner.Scan() {
-			linec <- scanner.Text()
+			outc <- scanner.Text()
 		}
 	}()
 
@@ -105,7 +104,7 @@ func (this *ClientCLI) JournalF(name string) (chan string, chan string, error) {
 		}
 	}()
 
-	return linec, errc, nil
+	return
 }
 
 func (this *ClientCLI) MachineAll() ([]MachineStatus, error) {
