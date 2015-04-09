@@ -1,5 +1,11 @@
 # fleet-ui
 
+## 0.1.9
+  * improve error handling
+
+## 0.1.8
+  * update fleetctl version
+
 ## 0.1.6
   * fix tmp directory not found issue (#11)
   * update build.sh 
