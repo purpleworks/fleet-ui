@@ -50,11 +50,13 @@ angular.module('fleetuiApp')
       // connection close
       WebSocket.onclose(function () {
         console.log('%cWebSocket Connection Close!', 'background: #34495e; color: #fff');
+        $scope.logs.push(' -- WebSocket Connection Close! --');
       });
 
       // error
       WebSocket.onerror(function (e) {
         console.log('%cWebSocket Error Occur!', 'background: #34495e; color: #fff');
+        $scope.logs.push(' -- WebSocket Error Occur! --');
       });
     }
 
