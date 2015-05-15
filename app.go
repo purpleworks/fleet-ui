@@ -15,6 +15,8 @@ var (
 	tempDir      string
 	etcdPeer     string
 	etcdPeerFlag = flag.String("etcd-peer", "172.17.42.1", "ETCD_PEER")
+	bind         string
+	bindFlag = flag.String("bind", "0.0.0.0:3000", "BIND")
 )
 
 func init() {
@@ -24,6 +26,11 @@ func init() {
 		etcdPeer = v
 	} else {
 		etcdPeer = *etcdPeerFlag
+	}
+	if v := os.Getenv("BIND"); v != "" {
+		bind = v
+	} else {
+		etcdPeer = *bindFlag
 	}
 
 	// init global variables
@@ -64,5 +71,5 @@ func main() {
 	n := negroni.Classic()
 	n.UseHandler(r)
 
-	n.Run(":3000")
+	n.Run(bind)
 }
