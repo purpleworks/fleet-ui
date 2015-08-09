@@ -97,11 +97,15 @@ angular.module('fleetuiApp')
         });
       }
     }
-
+    var wsprotocol = 'ws://'
+    if($location.protocol() == 'https') {
+      wsprotocol = 'wss://'
+    }
+    
     if(ENVIRONMENT == 'dev') {
-      WebSocket.new('ws://' + $location.host() + ':3000' + '/ws/journal/' + unitName);
+      WebSocket.new(wsprotocol + $location.host() + ':3000' + '/ws/journal/' + unitName);
     } else {
-      WebSocket.new('ws://' + $location.host() + ':' + $location.port() + '/ws/journal/' + unitName);
+      WebSocket.new(wsprotocol + $location.host() + ':' + $location.port() + '/ws/journal/' + unitName);
     }
     setCallback();
     $scope.$on('$destroy', function () {
