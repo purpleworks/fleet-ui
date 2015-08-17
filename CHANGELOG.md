@@ -1,5 +1,9 @@
 # fleet-ui
 
+## 0.1.11
+  * add bind address and port config
+  * add failed style
+
 ## 0.1.10
   * improve websocket error handling
   * server source refactoring

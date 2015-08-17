@@ -14,6 +14,7 @@ Web based UI for [fleet](https://github.com/coreos/fleet)
 (1) run docker container
 
 - -e ETCD_PEER=`your_etcd_peer_ip:peer_port`
+- -e BIND=`bind_ip:bind_port`
 - -p `port`:3000
 - -v `your_ssh_private_key_file_path`:/root/id_rsa
 
@@ -71,7 +72,7 @@ src/
 
 ```
 $ go install
-$ fleet-ui -etcd-peer=[your_etcd_peer_ip]
+$ fleet-ui -etcd-peer=[your_etcd_peer_ip] -bind=[bind_ip:bind_port]
 ```
 
 ### frontend (web based ui)

@@ -30,7 +30,7 @@ func init() {
 	if v := os.Getenv("BIND"); v != "" {
 		bind = v
 	} else {
-		etcdPeer = *bindFlag
+		bind = *bindFlag
 	}
 
 	// init global variables
