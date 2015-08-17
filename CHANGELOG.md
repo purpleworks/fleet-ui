@@ -1,6 +1,7 @@
 # fleet-ui
 
 ## 0.1.11
+  * support wss(websocket over http and https)
   * add bind address and port config
   * add failed style
 
