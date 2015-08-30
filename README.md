@@ -13,13 +13,13 @@ Web based UI for [fleet](https://github.com/coreos/fleet)
 
 (1) run docker container
 
-- -e ETCD_PEER=`your_etcd_peer_ip:peer_port`
+- -e ETCD_PEER=`protocol://your_etcd_peer_ip:peer_port`
 - -e BIND=`bind_ip:bind_port`
 - -p `port`:3000
 - -v `your_ssh_private_key_file_path`:/root/id_rsa
 
 ```sh
-docker run --rm -p 3000:3000 -e ETCD_PEER=10.0.0.1:4001 -v ~/.ssh/id_rsa:/root/id_rsa purpleworks/fleet-ui
+docker run --rm -p 3000:3000 -e ETCD_PEER=http://10.0.0.1:4001 -v ~/.ssh/id_rsa:/root/id_rsa purpleworks/fleet-ui
 ```
 
 (2) enjoy!
@@ -72,7 +72,7 @@ src/
 
 ```
 $ go install
-$ fleet-ui -etcd-peer=[your_etcd_peer_ip] -bind=[bind_ip:bind_port]
+$ fleet-ui -etcd-peer=[protocol://your_etcd_peer_ip:your_etcd_peer_port] -bind=[bind_ip:bind_port]
 ```
 
 ### frontend (web based ui)

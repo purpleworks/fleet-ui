@@ -1,5 +1,9 @@
 # fleet-ui
 
+## 0.1.12
+  * update ETCD_PEER option document
+  * update fleetctl (v0.10.2)
+
 ## 0.1.11
   * support wss(websocket over http and https)
   * add bind address and port config
