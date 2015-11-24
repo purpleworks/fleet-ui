@@ -36,7 +36,7 @@ angular.module('fleetuiApp')
 
     $scope.unitUpload = {
       loading: false,
-      url: '/api/v1/units/upload',
+      url: 'api/v1/units/upload',
       options: {
         container: 'unitUploadBtn',
         multi_selection: false,
