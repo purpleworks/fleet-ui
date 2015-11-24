@@ -9,7 +9,7 @@
  */
 angular.module('fleetuiApp')
   .service('unitService', function unitService($resource) {
-    return $resource('/api/v1/units/:collection_action/:id/:member_action', {
+    return $resource('api/v1/units/:collection_action/:id/:member_action', {
       id: '@id'
     }, {
       start: {
