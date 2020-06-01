@@ -193,6 +193,13 @@ var upgrader = websocket.Upgrader{
 }
 
 func wsHandler(w http.ResponseWriter, r *http.Request) {
+	upgrader.CheckOrigin = func(r *http.Request) bool {
+		if (r.Header.Get("Origin") == "http://" + r.Host) || (r.Header.Get("Origin") == "https://" + r.Host) {
+			return true
+		}
+		http.Error(w, "websocket: request origin not allowed by Upgrader.CheckOrigin", http.StatusForbidden)
+		return false
+	}
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
